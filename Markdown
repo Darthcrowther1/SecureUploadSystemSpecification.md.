@@ -1,0 +1,122 @@
+# Secure Upload System — Detailed Specification (Expanded)
+
+## 1. User Authentication & Roles
+
+### 1.1 Court Admin
+- Full system access within their court jurisdiction.
+- Manage court users, professional accounts, and external access.
+- Can view flagged uploads, assign cases, and manage permissions.
+
+### 1.2 Professional User (Solicitor, Legal Rep)
+- Can create and manage cases within assigned courts.
+- **Can create sub-accounts** for their staff, with granular role permissions:
+  - **Main Admin:** Full control over professional account and sub-accounts.
+  - **Staff User:** Limited permissions (e.g., upload only, view assigned cases).
+- Sub-account creation includes:
+  - Invite via email with initial login credentials.
+  - Role and permissions assignment.
+  - Activity monitored under main account.
+
+### 1.3 Unrepresented Party (External User)
+- Access limited to uploading/downloading on assigned cases.
+- **Account Creation Allowed Only After Invitation:**
+  - Court sends a **secure invitation link** with unique token.
+  - Upon visiting link, user must **create an account** with email and password.
+- **Time-Limited Access:**
+  - Account upload/download privileges are valid for a **court-defined period** (e.g., 14 days).
+  - After expiry, account is locked or access is revoked.
+- Cannot view other cases or user info.
+- Can only upload/download on assigned cases.
+- Uploads are subject to virus scan and abuse detection.
+
+---
+
+## 2. Case File & User Management
+
+### 2.1 Case Management
+- Court Admins and Professional Users can create/edit case files.
+- Assign unrepresented parties via their email; system generates secure invite links.
+- Bulk upload of cases via Excel upload, linking unrepresented parties.
+
+### 2.2 User Invitations & Access Control
+- System tracks issued invitation tokens with expiry.
+- Invitations can be revoked or re-issued.
+- Unrepresented party accounts have metadata tracking invitation date, expiry date, and linked cases.
+- Professional users’ sub-accounts tracked under main account with full audit.
+
+---
+
+## 3. Document & Video Upload
+
+- Virus scan and abuse detection on all uploads.
+- Unrepresented parties upload through limited accounts or secure links.
+- Professional sub-accounts respect upload limits set by main admin or court policy.
+
+---
+
+## 4. Dashboards
+
+### 4.1 Court Admin Dashboard
+- Manage courts, users, invitations.
+- View invitation status (pending, accepted, expired).
+- Revoke or resend invitation links.
+- Assign unrepresented parties to cases.
+- Manage flagged uploads and audit logs.
+
+### 4.2 Professional User Dashboard
+- Manage own account and sub-accounts.
+- Invite staff with role assignments.
+- Manage cases and assign unrepresented parties.
+- Monitor upload activity of sub-accounts.
+
+### 4.3 Unrepresented User Portal
+- Account creation via secure invitation.
+- Upload/download within access window.
+- Display expiry countdown for upload privileges.
+- Simple UI with case-related uploads.
+
+---
+
+## 5. Security & Compliance
+
+- Role-based access including **time-based restrictions** on unrepresented user accounts.
+- Secure storage and expiry of invitation tokens.
+- Upload moderation and virus scanning.
+- GDPR-compliant data retention and deletion policies.
+- Audit trails link activities to professional accounts or court admins.
+
+---
+
+## 6. Notifications & Alerts
+
+- Email notifications for:
+  - Invitation sent, accepted, or expired.
+  - Uploads flagged for abuse or viruses.
+  - Account expiry warnings sent to unrepresented parties.
+- Optional SMS or Gov Notify integration.
+
+---
+
+## 7. Deployment & Maintenance
+
+- Additional backend endpoints and frontend UI flows for invitation management and sub-account controls.
+- No change from previous deployment specs.
+
+---
+
+## 8. User Experience Flow (Unrepresented Party)
+
+1. Court or professional user sends invite email with secure link.
+2. Unrepresented party clicks link, registers an account.
+3. Upon login, allowed to upload/download case files for a fixed period.
+4. Expiry disables upload/download functions, but account remains accessible for viewing (optional).
+5. Court admin or professional user can extend or revoke access.
+
+---
+
+## 9. Future Enhancements (Optional)
+
+- Self-service password resets for unrepresented users.
+- Detailed activity reports for sub-accounts.
+- Expiry auto-notifications with one-click extension request.
+- Fine-grained upload quotas per user/sub-account.
